@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import com.example.gestionbudget.line.Line?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+
+<VBox alignment="CENTER" stylesheets="@assets/style.css" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.gestionbudget.TableController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <Label fx:id="welcomeText" styleClass="labelTitle">Application gestion de budget</Label>
+
+    <TableView fx:id="tableView">
+        <columns>
+            <TableColumn editable="false" text="periode" minWidth="80" prefWidth="80" maxWidth="80">
+                <cellValueFactory>
+                    <PropertyValueFactory property="periode"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn editable="false" text="total" minWidth="80" prefWidth="80" maxWidth="80">
+                <cellValueFactory>
+                    <PropertyValueFactory property="total"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn editable="false" text="logement" minWidth="80" prefWidth="80" maxWidth="80">
+                <cellValueFactory>
+                    <PropertyValueFactory property="logement"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn editable="false" text="nourriture" minWidth="80" prefWidth="80" maxWidth="80">
+                <cellValueFactory>
+                    <PropertyValueFactory property="nourriture"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn editable="false" text="voiture" minWidth="80" prefWidth="80" maxWidth="80">
+                <cellValueFactory>
+                    <PropertyValueFactory property="voiture"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn editable="false" text="sorties" minWidth="80" prefWidth="80" maxWidth="80">
+                <cellValueFactory>
+                    <PropertyValueFactory property="sorties"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn editable="false" text="transport" minWidth="80" prefWidth="80" maxWidth="80">
+                <cellValueFactory>
+                    <PropertyValueFactory property="transport"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn editable="false" text="voyage" minWidth="80" prefWidth="80" maxWidth="80">
+                <cellValueFactory>
+                    <PropertyValueFactory property="voyage"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn editable="false" text="impots" minWidth="80" prefWidth="80" maxWidth="80">
+                <cellValueFactory>
+                    <PropertyValueFactory property="impots"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn editable="false" text="autres" minWidth="80" prefWidth="80" maxWidth="80">
+                <cellValueFactory>
+                    <PropertyValueFactory property="autres"/>
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+        <items>
+            <FXCollections fx:factory="observableArrayList" >
+                <Line periode="2020-01" total="1000" logement="200" nourriture="200" sorties="100" voiture="100" voyage="100" impots="100" autres="100"/>
+                <Line periode="2020-02" total="2000" logement="400" nourriture="400" sorties="200" voiture="200" voyage="200" impots="200" autres="200"/>
+                <Line periode="2020-03" total="3000" logement="600" nourriture="600" sorties="300" voiture="300" voyage="300" impots="300" autres="300"/>
+            </FXCollections>
+        </items>
+    </TableView>
+    <Button text="Ajout d'une dépense" onAction="#onHelloButtonClick"/>
+</VBox>
