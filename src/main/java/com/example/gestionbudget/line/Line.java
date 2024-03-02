@@ -10,22 +10,20 @@ public class Line {
     private Float nourriture;
     private Float sorties;
     private Float transport;
-    private Float voiture;
     private Float voyage;
     private Float impots;
     private Float autres;
 
     public Line() {
-        this( String.valueOf(LocalDate.now()), 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
+        this( String.valueOf(LocalDate.now()), 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
     }
 
-    public Line(String periode, Float total, Float logement, Float nourriture, Float sorties, Float voiture, Float transport, Float voyage, Float impots, Float autres) {
+    public Line(String periode, Float logement, Float nourriture, Float sorties, Float transport, Float voyage, Float impots, Float autres) {
         setPeriode(periode);
-        this.total = total;
+        this.total = logement + nourriture + sorties  + transport + voyage + impots + autres;
         this.logement = logement;
         this.nourriture = nourriture;
         this.sorties = sorties;
-        this.voiture = voiture;
         this.transport = transport;
         this.voyage = voyage;
         this.impots = impots;
@@ -38,7 +36,7 @@ public class Line {
     }
 
     public void setPeriode(String periodeString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/M/d");
         this.periode = LocalDate.parse(periodeString, formatter);
     }
 
@@ -74,13 +72,6 @@ public class Line {
         this.sorties = sorties;
     }
 
-    public Float getVoiture() {
-        return voiture;
-    }
-
-    public void setVoiture(Float voiture) {
-        this.voiture = voiture;
-    }
 
     public Float getVoyage() {
         return voyage;
@@ -123,7 +114,6 @@ public class Line {
                 ", logement=" + logement +
                 ", nourriture=" + nourriture +
                 ", sorties=" + sorties +
-                ", voiture=" + voiture +
                 ", transport=" + transport +
                 ", voyage=" + voyage +
                 ", impots=" + impots +

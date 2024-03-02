@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
-<?import com.example.gestionbudget.line.Line?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
@@ -14,7 +13,7 @@
       stylesheets="@assets/generalStyle.css"
       spacing="20.0"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.gestionbudget.TableController"
+      fx:controller="com.example.gestionbudget.dialog.DialogController"
       styleClass="scene-background"
 >
     <padding>
@@ -55,14 +54,6 @@
                          minWidth="80">
                 <cellValueFactory>
                     <PropertyValueFactory property="nourriture"/>
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn styleClass="column-normal"
-                         editable="false"
-                         text="Voiture"
-                         minWidth="80">
-                <cellValueFactory>
-                    <PropertyValueFactory property="voiture"/>
                 </cellValueFactory>
             </TableColumn>
             <TableColumn styleClass="column-green"
@@ -108,11 +99,8 @@
         </columns>
         <items>
             <FXCollections fx:factory="observableArrayList" >
-                <Line periode="2023-08-18" total="1000" logement="200" nourriture="200" sorties="100" voiture="100" voyage="100" impots="100" autres="100"/>
-                <Line periode="2021-12-21" total="2000" logement="400" nourriture="400" sorties="200" voiture="200" voyage="200" impots="200" autres="200"/>
-                <Line periode="2020-01-12" total="3000" logement="600" nourriture="600" sorties="300" voiture="300" voyage="300" impots="300" autres="300"/>
             </FXCollections>
         </items>
     </TableView>
-    <Button styleClass="addButton" text="Ajout d'une dépense" onAction="#onHelloButtonClick"/>
+    <Button styleClass="addButton" text="Ajout d'une dépense" onAction="#addLine" />
 </VBox>

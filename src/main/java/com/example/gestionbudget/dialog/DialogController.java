@@ -1,11 +1,12 @@
 package com.example.gestionbudget.dialog;
 
-import com.example.gestionbudget.db.ExpenseDAO;
 import com.example.gestionbudget.line.Line;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import java.time.LocalDate;
-import java.util.List;
+import java.util.Optional;
 
 public class DialogController {
     public DatePicker periode;
@@ -17,39 +18,39 @@ public class DialogController {
     public TextField voyage;
     public TextField impots;
     public TextField autres;
-    private TableView<Line> tableView;
+
     @FXML
-    public Button btnOk;
+    private TableView<Line> tableView;
+
+    private final ObservableList<Line> items = FXCollections.observableArrayList();
+
+    public void initialize() {
+        items.addAll(
+                new Line("2021/2/2", 250.0f, 160.45f, 110.0f, 210.0f, 95.0f, 35.0f, 5.0f),
+                new Line("2022/3/3", 300.0f, 170.50f, 120.0f, 220.0f, 100.0f, 40.0f, 10.0f),
+                new Line("2023/4/4", 350.0f, 180.55f, 130.0f, 230.0f, 105.0f, 45.0f, 15.0f),
+                new Line("2024/5/5", 400.0f, 190.60f, 140.0f, 240.0f, 110.0f, 50.0f, 20.0f),
+                new Line("2025/6/6", 450.0f, 200.65f, 150.0f, 250.0f, 115.0f, 55.0f, 25.0f)
+        );
+        tableView.setItems(items);
+    }
+
+    public void addLine(ActionEvent event) {
+        Dialog<Line> addPersonDialog = new LineDialog();
+        Optional<Line> result = addPersonDialog.showAndWait();
+        result.ifPresent(items::add);
+
+        System.out.println(result);
+        event.consume();
+    }
+}
+/*
+Ancienne facon de faire :
+
+
     @FXML
     public Label errorReturn;
-    @FXML
-    public void initialize() {
 
-        isFloatField(total);
-        isFloatField(logement);
-        isFloatField(nourriture);
-        isFloatField(sorties);
-        isFloatField(transport);
-        isFloatField(voyage);
-        isFloatField(impots);
-        isFloatField(autres);
-
-        total.setOnKeyReleased(event -> onKeyReleasedProperty());
-        logement.setOnKeyReleased(event -> onKeyReleasedProperty());
-        nourriture.setOnKeyReleased(event -> onKeyReleasedProperty());
-        sorties.setOnKeyReleased(event -> onKeyReleasedProperty());
-        transport.setOnKeyReleased(event -> onKeyReleasedProperty());
-        voyage.setOnKeyReleased(event -> onKeyReleasedProperty());
-        impots.setOnKeyReleased(event -> onKeyReleasedProperty());
-        autres.setOnKeyReleased(event -> onKeyReleasedProperty());
-
-        onKeyReleasedProperty();
-    }
-
-    public void setTableView(TableView<Line> tableView) {
-        this.tableView = tableView;
-        btnOk.setDisable(true);
-    }
 
     private void isFloatField(TextField field) {
         field.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -66,23 +67,8 @@ public class DialogController {
         });
     }
 
-    public void onKeyReleasedProperty() {
-        boolean disableButtons =
-                    total.getText().isEmpty() ||
-                    logement.getText().isEmpty() ||
-                    nourriture.getText().isEmpty() ||
-                    sorties.getText().isEmpty() ||
-                    transport.getText().isEmpty() ||
-                    voyage.getText().isEmpty() ||
-                    impots.getText().isEmpty() ||
-                    autres.getText().isEmpty() ||
 
-                    !errorReturn.getText().isEmpty();
-
-        btnOk.setDisable(disableButtons);
-    }
-
-    public void onSubmit() {
+public void onSubmit() {
         try {
             Line line = new Line();
 
@@ -126,18 +112,10 @@ public class DialogController {
             periode.getScene().getWindow().hide();
         }
     }
-
-    public void onCancel() {
-        periode.setValue(null);
-        total.setText(null);
-        logement.setText(null);
-        nourriture.setText(null);
-        sorties.setText(null);
-        transport.setText(null);
-        voyage.setText(null);
-        impots.setText(null);
-        autres.setText(null);
-
-        periode.getScene().getWindow().hide();
+    public void setTableView(TableView<Line> tableView) {
+        this.tableView = tableView;
+        btnOk.setDisable(true);
     }
-}
+
+
+ */

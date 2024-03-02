@@ -6,6 +6,7 @@ module com.example.gestionbudget {
     // requires org.slf4j;
 
     opens com.example.gestionbudget to javafx.fxml;
+    opens com.example.gestionbudget.dialog to javafx.fxml;
 
     exports com.example.gestionbudget;
     exports com.example.gestionbudget.line;
