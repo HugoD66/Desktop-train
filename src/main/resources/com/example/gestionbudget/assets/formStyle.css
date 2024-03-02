@@ -1,0 +1,42 @@
+/************** Form **************/
+
+.input-form {
+    -fx-background-color: rgba(164, 224, 164, 0.18);
+}
+
+.date-picker-text {
+    -fx-font-family: "Droid Sans";
+    -fx-font-size: 12;
+    -fx-text-fill: rgb(19, 115, 101);
+}
+
+.date-picker-form {
+    -fx-border-color: rgba(164, 224, 164, 0.18);
+}
+
+.errorReturnText {
+    -fx-text-fill: red;
+    -fx-font-size: 10;
+    -fx-font-family: "Droid Sans";
+}
+
+.addButton {
+    -fx-background-color: rgb(19, 115, 101);;
+    -fx-text-fill: white;
+}
+
+.cancelButton {
+    -fx-background-color: white;
+    -fx-text-fill: rgb(19, 115, 101);
+}
+/*
+
+* {
+    -fx-primary-color: #007acc;
+    -fx-secondary-color: #4B6EAF;
+    -fx-light-grey-color: #d1d1d1;
+
+    -fx-focus-color: -fx-secondary-color;
+}
+
+ */

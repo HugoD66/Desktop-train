@@ -1,0 +1,18 @@
+:root {
+
+    /****** Colors ******/
+
+
+
+    -color-green-title-primary: rgb(19, 115, 101);
+    -color-green-table-secondary: rgba(174, 225, 174, 0.5);
+
+    /****** Fonts ******/
+
+    -font-title: "Droid Sans";
+    -font-alt: "Arial";
+    -font-button: "Consolas";
+
+    /****** Buttons ******/
+
+}

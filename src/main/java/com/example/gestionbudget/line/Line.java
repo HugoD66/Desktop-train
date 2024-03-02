@@ -1,7 +1,10 @@
 package com.example.gestionbudget.line;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Line {
-    private String periode;
+    private LocalDate periode;
     private Float total;
     private Float logement;
     private Float nourriture;
@@ -13,11 +16,11 @@ public class Line {
     private Float autres;
 
     public Line() {
-        this("", 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
+        this( String.valueOf(LocalDate.now()), 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
     }
 
     public Line(String periode, Float total, Float logement, Float nourriture, Float sorties, Float voiture, Float transport, Float voyage, Float impots, Float autres) {
-        this.periode = periode;
+        setPeriode(periode);
         this.total = total;
         this.logement = logement;
         this.nourriture = nourriture;
@@ -31,11 +34,12 @@ public class Line {
     }
 
     public String getPeriode() {
-        return String.valueOf(periode);
+        return periode.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
-    public void setPeriode(String periode) {
-        this.periode = periode;
+    public void setPeriode(String periodeString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        this.periode = LocalDate.parse(periodeString, formatter);
     }
 
     public Float getTotal() {
@@ -111,8 +115,10 @@ public class Line {
     }
 
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
         return "Line{" +
-                "periode=" + periode +
+                "periode=" + (periode != null ? periode.format(formatter) : "null") +
                 ", total=" + total +
                 ", logement=" + logement +
                 ", nourriture=" + nourriture +

@@ -4,20 +4,26 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.TextField?>
-<VBox alignment="CENTER" stylesheets="@assets/style.css" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<VBox alignment="CENTER" stylesheets="@assets/formStyle.css" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.gestionbudget.dialog.DialogController">
     <VBox alignment="CENTER" spacing="20.0">
-        <TextField fx:id="periode" promptText="Période" />
-        <TextField fx:id="total" promptText="Total" />
-        <TextField fx:id="logement" promptText="Logement" />
-        <TextField fx:id="nourriture" promptText="Nourriture" />
-        <TextField fx:id="sorties" promptText="Sorties" />
-        <TextField fx:id="transport" promptText="Transport" />
-        <TextField fx:id="voyage" promptText="Voyage" />
-        <TextField fx:id="impots" promptText="Impôts" />
-        <TextField fx:id="autres" promptText="Autres" />
+        <HBox alignment="BASELINE_CENTER">
+            <Label text="Période : " styleClass="date-picker-text"/>
+            <DatePicker styleClass="date-picker-form" fx:id="periode" promptText="Période" />
+        </HBox>
+        <TextField styleClass="input-form" fx:id="total" promptText="Total" />
+        <TextField styleClass="input-form" fx:id="logement" promptText="Logement" />
+        <TextField styleClass="input-form" fx:id="nourriture" promptText="Nourriture" />
+        <TextField styleClass="input-form" fx:id="sorties" promptText="Sorties" />
+        <TextField styleClass="input-form" fx:id="transport" promptText="Transport" />
+        <TextField styleClass="input-form" fx:id="voyage" promptText="Voyage" />
+        <TextField styleClass="input-form" fx:id="impots" promptText="Impôts" />
+        <TextField styleClass="input-form" fx:id="autres" promptText="Autres" />
     </VBox>
-
-    <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
-    <Button fx:id="btnOk" mnemonicParsing="false" onAction="#onSubmit" text="Ok" />
+    <Button fx:id="btnOk" styleClass="addButton" mnemonicParsing="false" onAction="#onSubmit" text="Ok" />
+    <Button fx:id="btnCancel" styleClass="cancelButton" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
+    <Label fx:id="errorReturn" text="" styleClass="errorReturnText" />
 </VBox>

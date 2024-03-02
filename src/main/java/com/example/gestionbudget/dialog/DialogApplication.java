@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class DialogApplication  extends Application {
+public class DialogApplication   {
 
     private TableView<Line> tableView;
 
@@ -18,16 +18,4 @@ public class DialogApplication  extends Application {
         this.tableView = tableView;
     }
 
-    @Override
-    public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(DialogApplication.class.getResource("/com/example/gestionbudget/form-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 300, 500);
-        primaryStage.setTitle("Ajouter une ligne");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        launch();
-    }
 }

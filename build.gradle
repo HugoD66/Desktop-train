@@ -35,6 +35,9 @@ javafx {
 }
 
 dependencies {
+    // Database
+    implementation 'org.xerial:sqlite-jdbc:3.44.1.0'
+    implementation 'org.slf4j:slf4j-simple:1.7.32'
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
