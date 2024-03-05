@@ -27,7 +27,7 @@ public class ExpenseDAO {
 
             while (rs.next()) {
                 Line expense = new Line();
-                expense.setPeriode(String.valueOf(rs.getDate("date")));
+                expense.setPeriode(rs.getString("date"));
                 expense.setTotal(rs.getFloat("total"));
                 expense.setLogement(rs.getFloat("housing"));
                 expense.setNourriture(rs.getFloat("food"));
@@ -60,6 +60,7 @@ public class ExpenseDAO {
             pstmt.setFloat(8, tax);
             pstmt.setFloat(9, other);
             pstmt.executeUpdate();
+            System.out.println("Expense added");
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());

@@ -76,8 +76,10 @@ public class Database {
         }
         return connection;
     }
+}
 
-    public static boolean insertExpense(LocalDate date, float total, float housing, float food, float goingOut, float transportation, float travel, float tax, float other) {
+/*
+public static boolean insertExpense(LocalDate date, float total, float housing, float food, float goingOut, float transportation, float travel, float tax, float other) {
         String sql = "INSERT INTO expense(date, total, housing, food, goingOut, transportation, travel, tax, other) VALUES(?,?,?,?,?,?,?,?,?)";
 
         try (Connection conn = connect();
@@ -98,4 +100,4 @@ public class Database {
             return false;
         }
     }
-}
+ */

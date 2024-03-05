@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.function.UnaryOperator;
 
+import static com.example.gestionbudget.db.ExpenseDAO.insertExpense;
 
 
 public class LineDialog extends Dialog<Line> {
@@ -112,9 +113,9 @@ public class LineDialog extends Dialog<Line> {
                 return null;
             }
             LocalDate selectedDate = periode.getValue();
-            String periodeString = selectedDate != null ? selectedDate.format(DateTimeFormatter.ofPattern("yyyy/M/d")) : "";
+            String periodeString = selectedDate != null ? selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) : "";
 
-            return new Line(
+            Line line = new Line(
                     periodeString,
                     Float.parseFloat(logement.getText()),
                     Float.parseFloat(nourriture.getText()),
@@ -124,6 +125,8 @@ public class LineDialog extends Dialog<Line> {
                     Float.parseFloat(impots.getText()),
                     Float.parseFloat(autres.getText())
             );
+            insertExpense(LocalDate.parse(periodeString, DateTimeFormatter.ofPattern("yyyy-MM-dd")), line.getTotal(), line.getLogement(), line.getNourriture(), line.getSorties(), line.getTransport(), line.getVoyage(), line.getImpots(), line.getAutres());
+            return line;
         });
     }
 

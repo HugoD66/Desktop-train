@@ -28,7 +28,6 @@ public class Line {
         this.voyage = voyage;
         this.impots = impots;
         this.autres = autres;
-
     }
 
     public String getPeriode() {
@@ -36,9 +35,11 @@ public class Line {
     }
 
     public void setPeriode(String periodeString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/M/d");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.periode = LocalDate.parse(periodeString, formatter);
     }
+
+
 
     public Float getTotal() {
         return total;
@@ -120,6 +121,4 @@ public class Line {
                 ", autres=" + autres +
                 '}';
     }
-
-
 }
