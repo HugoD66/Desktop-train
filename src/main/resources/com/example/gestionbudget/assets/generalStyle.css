@@ -75,3 +75,49 @@
     -fx-font-style: italic;
     -fx-alignment: center;
 }
+
+/************** Separator **************/
+.vertical-separator {
+    -fx-color: #d0eed0;
+    -fx-border-radius: 3px;
+    -fx-padding: 1px;
+}
+
+/************** Total Content **************/
+.total-content {
+    -fx-max-width: 250px;
+    -fx-min-width: 250px;
+    -fx-alignment: center;
+}
+
+.label-icon-total {
+    -fx-background-color: rgba(225, 248, 225, 0.69);
+    -fx-background-radius: 20px;
+    -fx-min-width: 40px;
+    -fx-min-height: 40px;
+    -fx-alignment: center;
+}
+.icon-view {
+    -fx-alignment: center;
+    -fx-start-margin: 10;
+}
+
+.label-total-content {
+    -fx-padding: 5;
+}
+
+.labelTotal {
+    -fx-font-size: 16;
+    -fx-text-fill: rgb(19, 115, 101);
+    -fx-font-family: "Droid Sans";
+
+}
+
+.labelDescription {
+    -fx-font-size: 14;
+    -fx-text-fill: rgb(6, 31, 28);
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+    -fx-padding: 6;
+    -fx-background-color: rgba(255, 255, 255, 0.32);
+}

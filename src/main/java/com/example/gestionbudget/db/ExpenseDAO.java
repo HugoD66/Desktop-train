@@ -9,7 +9,9 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ExpenseDAO {
     /*
@@ -94,5 +96,27 @@ public class ExpenseDAO {
             return false;
         }
     }
+
+    public static Map<String, Float> getTotalByCategory() {
+        Map<String, Float> totals = new HashMap<>();
+        String sql = "SELECT SUM(housing) AS housing, SUM(food) AS food, SUM(goingOut) AS goingOut, SUM(transportation) AS transportation, SUM(travel) AS travel, SUM(tax) AS tax, SUM(other) AS other FROM expense";
+        try (Connection conn = Database.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            if (rs.next()) {
+                totals.put("logement", rs.getFloat("housing"));
+                totals.put("nourriture", rs.getFloat("food"));
+                totals.put("sorties", rs.getFloat("goingOut"));
+                totals.put("transport", rs.getFloat("transportation"));
+                totals.put("voyage", rs.getFloat("travel"));
+                totals.put("impots", rs.getFloat("tax"));
+                totals.put("autres", rs.getFloat("other"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return totals;
+    }
+
 }
 

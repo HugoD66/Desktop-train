@@ -1,15 +1,16 @@
 package com.example.gestionbudget.dialog;
 
+import com.example.gestionbudget.db.ExpenseDAO;
 import com.example.gestionbudget.line.Line;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static com.example.gestionbudget.db.ExpenseDAO.deleteExpense;
 import static com.example.gestionbudget.db.ExpenseDAO.getAllExpenses;
@@ -30,6 +31,13 @@ public class DialogController {
     @FXML
     private TableView<Line> tableView;
 
+    @FXML
+    private ImageView totalIcon;
+
+    @FXML
+    private Label totalTotal, totalLogement, totalNourriture, totalSorties, totalTransport, totalVoyage, totalImpots, totalAutres;
+
+
     private final ObservableList<Line> items = FXCollections.observableArrayList();
 
     public void initialize() {
@@ -43,16 +51,26 @@ public class DialogController {
                 new Line("2025-06-06", 450.0f, 200.65f, 150.0f, 250.0f, 115.0f, 55.0f, 25.0f)
         );
          */
+
+
+        //Ajout icone Total content
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/example/gestionbudget/assets/picture/total-icon.png")));
+        totalIcon.setImage(icon);
+
+        //Importation des données de la DB
         List<Line> linesFromDB = getAllExpenses();
         items.addAll(linesFromDB);
-
         tableView.setItems(items);
 
+
+        //Event pour la suppression ligne table
         tableView.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
                 onTableClick();
             }
         });
+
+        updateTotals();
 
     }
 
@@ -61,6 +79,8 @@ public class DialogController {
         Optional<Line> result = addPersonDialog.showAndWait();
         result.ifPresent(items::add);
 
+        updateTotals();
+
         event.consume();
     }
 
@@ -68,7 +88,6 @@ public class DialogController {
         Line selectedLine = tableView.getSelectionModel().getSelectedItem();
         if (selectedLine != null) {
             lineSelected = selectedLine;
-            System.out.println(selectedLine);
         }
     }
 
@@ -77,6 +96,28 @@ public class DialogController {
         if (selectedLine != null) {
             items.remove(selectedLine);
             deleteExpense(selectedLine);
+
+            updateTotals();
+
         }
     }
+
+
+    public void updateTotals() {
+        Map<String, Float> totals = ExpenseDAO.getTotalByCategory();
+        totalLogement.setText("Logement : " + totals.getOrDefault("logement", 0f).toString() + " €");
+        totalNourriture.setText("Nourriture : " + totals.getOrDefault("nourriture", 0f).toString() + " €");
+        totalSorties.setText("Sorties : " + totals.getOrDefault("sorties", 0f).toString() + " €");
+        totalTransport.setText("Transport : " + totals.getOrDefault("transport", 0f).toString() + " €");
+        totalVoyage.setText("Voyage : " + totals.getOrDefault("voyage", 0f).toString() + " €");
+        totalImpots.setText("Impôts : " + totals.getOrDefault("impots", 0f).toString() + " €");
+        totalAutres.setText("Autres : " + totals.getOrDefault("autres", 0f).toString() + " €");
+
+
+
+        float totalGeneral = totals.values().stream().reduce(0f, Float::sum);
+
+        totalTotal.setText("Total : " + totalGeneral + " €");
+    }
+
 }

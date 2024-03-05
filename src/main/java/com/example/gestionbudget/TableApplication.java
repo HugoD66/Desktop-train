@@ -14,7 +14,7 @@ public class TableApplication extends Application {
     public void start(Stage stage){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(TableApplication.class.getResource("table-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 765, 550);
+            Scene scene = new Scene(fxmlLoader.load(), 1030, 550);
             stage.setTitle("EconoMe");
             stage.getIcons().add(new Image("./com/example/gestionbudget/assets/picture/budget-icon.png"));
             stage.setScene(scene);
