@@ -54,7 +54,24 @@
     -fx-border-radius: 6;
 }
 
+.button-list {
+    -fx-alignment: center;
+    -fx-spacing: 10;
+}
+
 .addButton {
     -fx-background-color: rgb(19, 115, 101);;
     -fx-text-fill: white;
+}
+
+.deleteButton {
+    -fx-background-color: white;
+    -fx-text-fill: rgb(19, 115, 101);
+}
+
+#emptyTableLabel {
+    -fx-text-fill: gray;
+    -fx-font-size: 16px;
+    -fx-font-style: italic;
+    -fx-alignment: center;
 }

@@ -67,5 +67,32 @@ public class ExpenseDAO {
             return false;
         }
     }
+
+    public static boolean deleteExpense(Line line) {
+        String sql = "DELETE FROM expense WHERE date = ? AND total = ? AND housing = ? AND food = ? AND goingOut = ? AND transportation = ? AND travel = ? AND tax = ? AND other = ?";
+        try (Connection conn = Database.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, line.getPeriode()); // Assurez-vous que cela correspond au format de date dans votre base de données
+            pstmt.setFloat(2, line.getTotal());
+            pstmt.setFloat(3, line.getLogement());
+            pstmt.setFloat(4, line.getNourriture());
+            pstmt.setFloat(5, line.getSorties());
+            pstmt.setFloat(6, line.getTransport());
+            pstmt.setFloat(7, line.getVoyage());
+            pstmt.setFloat(8, line.getImpots());
+            pstmt.setFloat(9, line.getAutres());
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows > 0) {
+                System.out.println("Expense deleted successfully.");
+                return true;
+            } else {
+                System.out.println("No expense found with specified attributes.");
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error deleting expense: " + e.getMessage());
+            return false;
+        }
+    }
 }
 
