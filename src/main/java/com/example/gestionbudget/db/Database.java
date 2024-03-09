@@ -40,21 +40,17 @@ public class Database {
 
     private static boolean createTableIfNotExists() {
         String createTables =
-                    //                DROP TABLE IF EXISTS expense;
-                """
-                
-                CREATE TABLE IF NOT EXISTS expense(
-                        date TEXT NOT NULL,
-                        housing REAL NOT NULL,
-                        TOTAL REAL NOT NULL,
-                        food REAL NOT NULL,
-                        goingOut REAL NOT NULL,
-                        transportation REAL NOT NULL,
-                        travel REAL NOT NULL,
-                        tax REAL NOT NULL,
-                        other REAL NOT NULL
-                );
-                """;
+                "CREATE TABLE IF NOT EXISTS expense(" +
+                        "date TEXT NOT NULL," +
+                        "housing REAL NOT NULL," +
+                        "TOTAL REAL NOT NULL," +
+                        "food REAL NOT NULL," +
+                        "goingOut REAL NOT NULL," +
+                        "transportation REAL NOT NULL," +
+                        "travel REAL NOT NULL," +
+                        "tax REAL NOT NULL," +
+                        "other REAL NOT NULL" +
+                        ");";
 
         try (Connection connection = Database.connect()) {
             PreparedStatement statement = connection.prepareStatement(createTables);
