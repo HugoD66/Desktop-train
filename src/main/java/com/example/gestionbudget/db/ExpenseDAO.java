@@ -52,7 +52,7 @@ public class ExpenseDAO {
 
         try (Connection conn = Database.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, formatter.format(date)); // Utilisez formatter.format(date) au lieu de date.toString()
+            pstmt.setString(1, formatter.format(date));
             pstmt.setFloat(2, total);
             pstmt.setFloat(3, housing);
             pstmt.setFloat(4, food);
@@ -62,7 +62,6 @@ public class ExpenseDAO {
             pstmt.setFloat(8, tax);
             pstmt.setFloat(9, other);
             pstmt.executeUpdate();
-            System.out.println("Expense added");
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -74,7 +73,7 @@ public class ExpenseDAO {
         String sql = "DELETE FROM expense WHERE date = ? AND total = ? AND housing = ? AND food = ? AND goingOut = ? AND transportation = ? AND travel = ? AND tax = ? AND other = ?";
         try (Connection conn = Database.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, line.getPeriode()); // Assurez-vous que cela correspond au format de date dans votre base de données
+            pstmt.setString(1, line.getPeriode());
             pstmt.setFloat(2, line.getTotal());
             pstmt.setFloat(3, line.getLogement());
             pstmt.setFloat(4, line.getNourriture());
@@ -84,13 +83,7 @@ public class ExpenseDAO {
             pstmt.setFloat(8, line.getImpots());
             pstmt.setFloat(9, line.getAutres());
             int affectedRows = pstmt.executeUpdate();
-            if (affectedRows > 0) {
-                System.out.println("Expense deleted successfully.");
-                return true;
-            } else {
-                System.out.println("No expense found with specified attributes.");
-                return false;
-            }
+            return affectedRows > 0;
         } catch (SQLException e) {
             System.out.println("Error deleting expense: " + e.getMessage());
             return false;
@@ -117,6 +110,4 @@ public class ExpenseDAO {
         }
         return totals;
     }
-
 }
-

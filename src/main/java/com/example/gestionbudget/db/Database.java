@@ -10,14 +10,22 @@ import java.time.LocalDate;
 // import static com.example.financemanager.FinanceTrackerApplication.findAndCreateOSFolder;
 
 public class Database {
-    private static final String location = "database.db";
 
-    public static boolean isOK() {
+    private static String dbPath = ""; // Chemin de la base de données configuré globalement
+
+    public static void setDbPath(String newPath) {
+        dbPath = newPath;
+    }
+
+   // boolean dbInitialized = com.example.gestionbudget.db.Database.isOK(applicationDir + File.separator + "database.db");
+
+
+    public static boolean isOK(String dbPath) {
         if (!checkDrivers()) return false;
 
-        if (!checkConnection()) return false;
+        if (!checkConnection(dbPath)) return false;
 
-        return createTableIfNotExists();
+        return createTableIfNotExists(dbPath);
     }
 
     private static boolean checkDrivers() {
@@ -30,7 +38,7 @@ public class Database {
         }
     }
 
-    private static boolean checkConnection() {
+    private static boolean checkConnection(String dbPath) {
         try (Connection connection = connect()) {
             return connection != null;
         } catch (SQLException e) {
@@ -38,7 +46,7 @@ public class Database {
         }
     }
 
-    private static boolean createTableIfNotExists() {
+    private static boolean createTableIfNotExists(String dbPath) {
         String createTables =
                 "CREATE TABLE IF NOT EXISTS expense(" +
                         "date TEXT NOT NULL," +
@@ -52,7 +60,7 @@ public class Database {
                         "other REAL NOT NULL" +
                         ");";
 
-        try (Connection connection = Database.connect()) {
+        try (Connection connection = connect()) {
             PreparedStatement statement = connection.prepareStatement(createTables);
             statement.executeUpdate();
             System.out.println("Table created");
@@ -66,34 +74,10 @@ public class Database {
         String dbPrefix = "jdbc:sqlite:";
         Connection connection;
         try {
-            connection = DriverManager.getConnection(dbPrefix +  location);
+            connection = DriverManager.getConnection(dbPrefix + dbPath);
         } catch (SQLException exception) {
             return null;
         }
         return connection;
     }
 }
-
-/*
-public static boolean insertExpense(LocalDate date, float total, float housing, float food, float goingOut, float transportation, float travel, float tax, float other) {
-        String sql = "INSERT INTO expense(date, total, housing, food, goingOut, transportation, travel, tax, other) VALUES(?,?,?,?,?,?,?,?,?)";
-
-        try (Connection conn = connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, date.toString());
-            pstmt.setFloat(2, total);
-            pstmt.setFloat(3, housing);
-            pstmt.setFloat(4, food);
-            pstmt.setFloat(5, goingOut);
-            pstmt.setFloat(6, transportation);
-            pstmt.setFloat(7, travel);
-            pstmt.setFloat(8, tax);
-            pstmt.setFloat(9, other);
-            pstmt.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
- */
