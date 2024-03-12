@@ -7,6 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 
 //GIT REFERENCE : https://github.com/Jicay/FinanceTrackerDemo
@@ -14,8 +17,8 @@ import java.io.File;
 
 public class TableApplication extends Application {
 
+    private static final Logger logger = LoggerFactory.getLogger(TableApplication.class);
     private static String basePath;
-
 
     @Override
     public void start(Stage stage){
@@ -32,6 +35,8 @@ public class TableApplication extends Application {
     }
 
     public static void main(String[] args) {
+        logger.info("Démarrage de l'application...");
+
         basePath = AppConfig.getBasePathForOS();
         String applicationDir = basePath + File.separator + "EconoMe";
         File appDirectory = new File(applicationDir);
@@ -45,9 +50,9 @@ public class TableApplication extends Application {
 
         boolean dbInitialized = Database.isOK(dbPath);
         if (dbInitialized) {
-            System.out.println("La base de données a été correctement initialisée.");
+            logger.info("La base de données a été correctement initialisée.");
         } else {
-            System.out.println("Échec de l'initialisation de la base de données.");
+            logger.error("Échec de l'initialisation de la base de données.");
             return;
         }
 

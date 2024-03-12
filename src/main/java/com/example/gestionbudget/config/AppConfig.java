@@ -12,7 +12,7 @@ public class AppConfig {
         } else if (osName.contains("nux") || osName.contains("nix") || osName.contains("aix")) {
             basePath = System.getProperty("user.home");
         } else {
-            basePath = System.getProperty("user.home"); // Fallback
+            basePath = System.getProperty("user.home");
         }
 
         return basePath;

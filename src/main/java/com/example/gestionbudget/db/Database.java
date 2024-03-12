@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 public class Database {
 
-    private static String dbPath = ""; // Chemin de la base de données configuré globalement
+    private static String dbPath = "";
 
     public static void setDbPath(String newPath) {
         dbPath = newPath;
