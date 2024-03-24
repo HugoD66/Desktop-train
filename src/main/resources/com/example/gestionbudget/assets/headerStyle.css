@@ -1,0 +1,14 @@
+/************** Header **************/
+
+
+.header {
+    -fx-pref-height: 300px;
+    -fx-min-height: 300px;
+    -fx-max-height: 300px;
+    -fx-background-radius: 0;
+}
+
+.menu {
+    -fx-background-color: #00ef00; /* Ajustez la couleur de fond au besoin */
+    -fx-background-radius: 0;
+}

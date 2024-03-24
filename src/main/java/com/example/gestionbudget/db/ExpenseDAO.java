@@ -13,12 +13,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.gestionbudget.GraphicController.DATE_FORMAT;
+
 public class ExpenseDAO {
     /*
     Un objet d'accès aux données (en anglais data access object ou DAO)
     est un patron de conception (c'est-à-dire un modèle pour concevoir
     une solution) utilisé dans les architectures logicielles objet.
     */
+    private static final String tableName = "expense";
+    private static final String dateColumn = "date";
+    private static final String housingColumn = "housing";
+    private static final String foodColumn = "food";
+    private static final String goingOutColumn = "goingOut";
+    private static final String transportationColumn = "transportation";
+    private static final String travelColumn = "travel";
+    private static final String taxColumn = "tax";
+    private static final String otherColumn = "other";
 
     public static List<Line> getAllExpenses() {
         List<Line> expenses = new ArrayList<>();
@@ -116,6 +127,35 @@ public class ExpenseDAO {
             System.out.println(e.getMessage());
         }
         return totals;
+    }
+
+    public static List<Line> findLastExpensesEndingAtCurrentMonth(int numberOfLines, LocalDate currentMonth) {
+        DateTimeFormatter dbDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String query = "SELECT * FROM " + tableName
+                + " WHERE " + dateColumn + " <= ?"
+                + " ORDER BY " + dateColumn + " DESC LIMIT " + numberOfLines;
+
+        List<Line> lastExpenses = new ArrayList<>();
+
+        try (Connection connection = Database.connect();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, currentMonth.format(dbDateFormat));
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                lastExpenses.add(new Line(
+                        rs.getString(dateColumn),
+                        rs.getFloat(housingColumn),
+                        rs.getFloat(foodColumn),
+                        rs.getFloat(goingOutColumn),
+                        rs.getFloat(transportationColumn),
+                        rs.getFloat(travelColumn),
+                        rs.getFloat(taxColumn),
+                        rs.getFloat(otherColumn)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lastExpenses;
     }
 
 }

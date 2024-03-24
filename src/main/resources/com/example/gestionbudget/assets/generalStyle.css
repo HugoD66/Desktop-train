@@ -5,12 +5,13 @@
 }
 
 .labelTitle {
+    -fx-text-alignment: center;
     -fx-font-size: 30;
+    -fx-min-width: 100%;
     -fx-font-weight: bold;
     -fx-text-fill: rgb(19, 115, 101);
     -fx-font-family: "Droid Sans";
 }
-
 /************** Table View **************/
 
 .table-view {
@@ -121,3 +122,13 @@
     -fx-padding: 6;
     -fx-background-color: rgba(255, 255, 255, 0.32);
 }
+
+.headerContent{
+    -fx-background-color: rgba(0, 33, 248, 0.69);
+    -fx-height: 180px;
+    -fx-padding: 10;
+    -fx-min-height: 180px;
+    -fx-max-height: 180px;
+    -fx-min-width: 100%;
+}
+

@@ -11,5 +11,7 @@ module com.example.gestionbudget {
     exports com.example.gestionbudget;
     exports com.example.gestionbudget.line;
     exports com.example.gestionbudget.dialog;
+    exports com.example.gestionbudget.header;
     exports com.example.gestionbudget.db;
+    opens com.example.gestionbudget.header to javafx.fxml;
 }

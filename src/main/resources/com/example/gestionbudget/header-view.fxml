@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+
+<MenuBar
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.example.gestionbudget.header.HeaderController"
+    fx:id="root"
+    stylesheets="@assets/headerStyle.css"
+    styleClass="menu-bar">
+    <Menu text="Fichier">
+            <MenuItem fx:id="saveMenuItem" text="Tableau" onAction="#handleTable"/>
+            <MenuItem fx:id="quitMenuItem" text="Graphique" onAction="#handleGraphics"/>
+    </Menu>
+</MenuBar>
